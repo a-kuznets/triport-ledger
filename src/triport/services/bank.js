@@ -1,6 +1,11 @@
-import * as ledger from './ledger.js';
-import { tickerColumn } from './market.js';
-import constants from './scribe.json' assert { type: 'json' };
+import * as ledger
+    from './ledger.js';
+import { tickerColumn }
+    from './market.js';
+import constants
+    from './scribe.json' assert {
+    type: 'json'
+    };
 
 export async function accountExists(id, acct) {
     const fin = await finances(id);

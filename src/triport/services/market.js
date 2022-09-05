@@ -1,5 +1,9 @@
-import * as ledger from './ledger.js';
-import constants from './scribe.json' assert { type: 'json' };
+import * as ledger
+    from './ledger.js';
+import constants
+    from './scribe.json' assert {
+    type: 'json'
+    };
 
 export async function date(id) {
     const ex = await exchange(id);

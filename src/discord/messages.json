@@ -1,9 +1,9 @@
 {
-    "userNotConfigured": "Who are you? How'd you get in here? (User not configured)",
-    "accountDoesNotExist": "No loitering. Open an account or leave, waster. (Couldn't find account)",
-    "tryAgainTypo": "Try again. Careful this time, Fat Fingers. (Invalid argument)",
-    "alreadyRegistered": "Yup, I've got your name right here. (User already exists)",
-    "registered": "All investing is subject to risk, including the possible loss of the money you invest. (Registered successfully)",
-    "notEnoughCash": "Dream a little smaller, you broke bastard. (Not enough cash)",
-    "notEnoughStock": "Count up your shares and think again. (Not enough stock)"
+    "userNotConfigured": "User not configured.",
+    "accountDoesNotExist": "Couldn't find account.",
+    "tryAgainTypo": "Invalid argument.",
+    "alreadyRegistered": "User already exists.",
+    "registered": "All investing is subject to risk, including the possible loss of the money you invest.",
+    "notEnoughCash": "Not enough cash.",
+    "notEnoughStock": "Not enough shares."
 }

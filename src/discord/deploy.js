@@ -4,7 +4,7 @@ import { Routes } from 'discord-api-types/v9';
 import config from '../../config/discord.json' assert { type: 'json' };
 
 const commands = [];
-const commandFiles = readdirSync('./commands').filter(file => {
+const commandFiles = readdirSync('./src/discord/commands').filter(file => {
 	return file.endsWith('.js')
 });
 

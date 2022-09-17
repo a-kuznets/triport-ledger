@@ -3,7 +3,7 @@ import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/services/market.js';
 import * as bank from '../../triport/services/bank.js';
-import constants from '../../triport/scribe.json' assert { type: 'json' };
+import scribe from '../../triport/scribe.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
@@ -30,11 +30,11 @@ export async function execute(interaction) {
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
-    await rules.assertAccountExists(fin, constants.cash);
+    await rules.assertAccountExists(fin, scribe.cash);
     const ex = await market.exchange(sheetId);
     const price = await market.stockPrice(ex, ticker);
     const cost = quantity * price;
-    await rules.assertEnoughMoney(fin, constants.cash, cost);
+    await rules.assertEnoughMoney(fin, scribe.cash, cost);
     const stockExists = await bank.stockExists(fin, ticker);
     if (stockExists) {
         await bank.updateStock(fin, sheetId, ticker, quantity);
@@ -44,7 +44,7 @@ export async function execute(interaction) {
     const date = await market.date(ex, ticker);
     const event = `Buy ${quantity} ${ticker}`;
     const transaction = [
-        fin, sheetId, date, constants.payee, event, 0 - cost, constants.cash
+        fin, sheetId, date, scribe.payee, event, 0 - cost, scribe.cash
     ];
     await bank.transact(...transaction);
     return `Bought ${quantity} ${ticker} at ${money.format(price)} on ${date}.`;

@@ -1,9 +1,6 @@
 import * as users from '../users.js';
 import * as rules from '../rules.js';
-import * as money from '../../utilities/money.js';
-import * as market from '../../triport/services/market.js';
 import * as bank from '../../triport/services/bank.js';
-import constants from '../../triport/scribe.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()

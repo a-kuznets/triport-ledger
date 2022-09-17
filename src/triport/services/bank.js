@@ -38,10 +38,10 @@ export async function ownedStock(fin, ticker) {
     return Number(quantity);
 }
 
-export async function newStock(fin, id, ticker, quantity) {
+export async function newStock(fin, ex, id, ticker, quantity) {
     const row = nextAssetRow(fin);
     const range = `G${(row + 1)}:J${(row + 1)}`;
-    const tickerCol = await tickerColumn(id, ticker);
+    const tickerCol = await tickerColumn(ex, ticker);
     const payload = [
         stockText(ticker),
         parseInt(quantity),

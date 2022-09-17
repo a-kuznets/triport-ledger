@@ -1,4 +1,4 @@
-import sheets from '../../google/sheets.js';
+import sheets from '../google/sheets.js';
 
 export async function get(id, name) {
     const request = {

@@ -1,4 +1,4 @@
-import * as ledger from './ledger.js';
+import * as ledger from '../ledger.js';
 import { tickerColumn } from './market.js';
 import scribe from '../scribe.json' assert { type: 'json' };
 

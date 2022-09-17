@@ -6,11 +6,11 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
     .setName('price')
-    .setDescription('The market moves fast.')
+    .setDescription('View the price of a share.')
     .addStringOption(option => {
         return option
             .setName('ticker')
-            .setDescription('Which company would you like to price check?')
+            .setDescription('In which company?')
             .setRequired(true);
     });
 
@@ -22,5 +22,5 @@ export async function execute(interaction) {
     const ex = await market.exchange(sheetId);
     const price = await market.stockPrice(ex, ticker);
     const date = await market.date(ex);
-    return `${ticker} is worth ${money.format(price)} on ${date}`;
+    return `${ticker} is worth ${money.format(price)} on ${date}.`;
 }

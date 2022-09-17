@@ -1,9 +1,9 @@
 {
-    "userNotConfigured": "User not configured.",
+    "userNotConfigured": "User not configured. Please register to trade on the Triport City Exchange.",
     "accountDoesNotExist": "Couldn't find account.",
     "tryAgainTypo": "Invalid command. Please try again.",
     "alreadyRegistered": "User already exists.",
-    "registered": "All investing is subject to risk, including the possible loss of the money you invest.",
+    "registered": "Registered successfully. Disclaimer: all investing is subject to risk, including the possible loss of the money you invest.",
     "notEnoughCash": "Not enough cash.",
     "notEnoughStock": "Not enough shares."
 }

@@ -39,7 +39,7 @@ export async function execute(interaction) {
     if (stockExists) {
         await bank.updateStock(fin, sheetId, ticker, quantity);
     } else {
-        await bank.newStock(fin, sheetId, ticker, quantity);
+        await bank.newStock(fin, ex, sheetId, ticker, quantity);
     }
     const date = await market.date(ex, ticker);
     const event = `Buy ${quantity} ${ticker}`;
@@ -47,5 +47,5 @@ export async function execute(interaction) {
         fin, sheetId, date, constants.payee, event, 0 - cost, constants.cash
     ];
     await bank.transact(...transaction);
-    return `Bought ${quantity} ${ticker} at ${money.format(price)} on ${date}`;
+    return `Bought ${quantity} ${ticker} at ${money.format(price)} on ${date}.`;
 }

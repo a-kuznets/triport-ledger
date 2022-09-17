@@ -25,7 +25,8 @@ export async function execute(interaction) {
     const stockExists = await bank.stockExists(fin, ticker);
     if (stockExists) {
         const ownedStock = await bank.ownedStock(fin, ticker);
-        return `${ownedStock} shares owned in ${ticker}`;
+        const noun = ownedStock === 1 ? "share" : "shares";
+        return `${ownedStock} ${noun} owned in ${ticker}.`;
     }
-    return `0 shares owned in ${ticker}`;
+    return `0 shares owned in ${ticker}.`;
 }

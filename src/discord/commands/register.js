@@ -23,7 +23,7 @@ export async function execute(interaction) {
     const userExists = await users.doesUserExist(tag);
     if (!userExists) {
         await users.newUser(tag, id);
-        return messages.registered;;
+        return messages.registered;
     }
     await rules.assertNotRegistered(tag, id);
     await users.updateUser(tag, id);

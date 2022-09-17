@@ -6,15 +6,15 @@ import scribe from '../../triport/scribe.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
-    .setName('cash')
-    .setDescription('View the balance of your cash account.');
+    .setName('worth')
+    .setDescription('View your net worth.');
 
 export async function execute(interaction) {
     const tag = interaction.user.tag;
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
-    await rules.assertAccountExists(fin, scribe.cash);
-    const cash = await bank.accountBalance(fin, scribe.cash);
-    return `You have ${money.format(cash)} in your cash account.`;
+    await rules.assertAccountExists(fin, scribe.netWorth);
+    const netWorth = await bank.accountBalance(fin, scribe.netWorth);
+    return `Your net worth is ${money.format(netWorth)}.`;
 }

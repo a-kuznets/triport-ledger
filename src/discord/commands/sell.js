@@ -43,5 +43,5 @@ export async function execute(interaction) {
         fin, sheetId, date, 'Self', event, revenue, scribe.cash
     ];
     await bank.transact(...transaction);
-    return `Sold ${quantity} ${ticker} at ${money.format(price)} on ${date}`;
+    return `Sold ${quantity} ${ticker} at ${money.format(price)} on ${date}.`;
 }

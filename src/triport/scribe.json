@@ -3,6 +3,7 @@
     "exchange": "Triport City Exchange",
     "accounts": "Accounts",
     "cash": "Cash",
+    "netWorth": "Total Net Worth",
     "payee": "TCU",
     "assetNameCol": 6,
     "assetValCol": 7

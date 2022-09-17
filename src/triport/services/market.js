@@ -1,5 +1,5 @@
 import * as ledger from './ledger.js';
-import scribe from './scribe.json' assert { type: 'json' };
+import scribe from '../scribe.json' assert { type: 'json' };
 
 export async function date(ex) {
     return ex[ex.length - 1][0];

@@ -1,6 +1,6 @@
 import * as ledger from './ledger.js';
 import { tickerColumn } from './market.js';
-import scribe from './scribe.json' assert { type: 'json' };
+import scribe from '../scribe.json' assert { type: 'json' };
 
 export async function accountExists(fin, acct) {
     const i = fin[0].indexOf(scribe.accounts);

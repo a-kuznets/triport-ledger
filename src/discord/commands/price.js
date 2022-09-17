@@ -1,7 +1,7 @@
 import * as users from '../users.js';
 import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
-import * as market from '../../triport/market.js';
+import * as market from '../../triport/services/market.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()

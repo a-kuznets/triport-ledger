@@ -23,9 +23,7 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
-	console.log('running command');
 	const command = client.commands.get(interaction.commandName);
-	console.log(command);
 	if (!command) return;
 
 	try {

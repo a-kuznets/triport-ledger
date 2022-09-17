@@ -1,7 +1,7 @@
 import * as users from '../users.js';
 import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
-import * as bank from '../../triport/bank.js';
+import * as bank from '../../triport/services/bank.js';
 import scribe from '../../triport/scribe.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
 

@@ -1,5 +1,5 @@
 import * as users from './users.js';
-import * as bank from '../triport/bank.js';
+import * as bank from '../triport/services/bank.js';
 import TriportError from '../triport/error.js';
 import messages from './messages.json' assert { type: 'json' };
 

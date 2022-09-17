@@ -2,7 +2,7 @@
  * Format a number as a currency. 
  * Optionally provide a currency symbol.
  */
-export function format(price, symbol = '') {
+export function format(price, symbol = '$') {
     return symbol + new Intl.NumberFormat().format(decRound(price, 2));
 }
 

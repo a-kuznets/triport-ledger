@@ -26,11 +26,13 @@ export async function execute(interaction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker').toUpperCase();
     const quantity = interaction.options.getInteger('quantity');
+    rules.assertPositiveInteger(quantity);
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
     await rules.assertAccountExists(fin, constants.cash);
-    const price = await market.stockPrice(fin, ticker);
+    const ex = await market.exchange(sheetId);
+    const price = await market.stockPrice(ex, ticker);
     const cost = quantity * price;
     await rules.assertEnoughMoney(fin, constants.cash, cost);
     const stockExists = await bank.stockExists(fin, ticker);
@@ -39,7 +41,6 @@ export async function execute(interaction) {
     } else {
         await bank.newStock(fin, sheetId, ticker, quantity);
     }
-    const ex = await market.exchange(id);
     const date = await market.date(ex, ticker);
     const event = `Buy ${quantity} ${ticker}`;
     const transaction = [

@@ -26,9 +26,10 @@ export async function execute(interaction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker').toUpperCase();
     const quantity = interaction.options.getInteger('quantity');
+    rules.assertPositiveInteger(quantity);
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
-    const fin = bank.finances(sheetId);
+    const fin = await bank.finances(sheetId);
     await rules.assertStockExists(fin, ticker);
     await rules.assertEnoughStock(fin, ticker, quantity);
     await rules.assertAccountExists(fin, scribe.cash);

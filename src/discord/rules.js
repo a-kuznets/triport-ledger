@@ -50,3 +50,9 @@ export async function assertNotRegistered(tag, id) {
         throw new TriportError(messages.alreadyRegistered);
     }
 }
+
+export function assertPositiveInteger(int) {
+    if (int < 1) {
+        throw new TriportError(messages.tryAgainTypo);
+    }
+}

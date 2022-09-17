@@ -1,3 +1,5 @@
+npm install
+
 # Create config files.
 mkdir -p config
 touch config/discord.json

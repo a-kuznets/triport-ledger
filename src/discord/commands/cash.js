@@ -1,4 +1,4 @@
-import * as users from '../../users/users.js';
+import * as users from '../users.js';
 import * as money from '../../utilities/money.js';
 import * as bank from '../../triport/bank.js';
 import constants from '../../triport/scribe.json' assert { type: 'json' };

@@ -40,4 +40,4 @@ async function users() {
     return JSON.parse(contents);
 }
 
-const USER_STORE = path.resolve('src/users/users.json');
+const USER_STORE = path.resolve('config/users.json');

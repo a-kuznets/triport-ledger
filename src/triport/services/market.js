@@ -1,3 +1,4 @@
+import TriportError from '../error.js';
 import * as ledger from '../ledger.js';
 import scribe from '../scribe.json' assert { type: 'json' };
 
@@ -11,7 +12,8 @@ export async function stockPrice(ex, ticker) {
         return header.toLowerCase().includes(`(${ticker.toLowerCase()})`)
     });
     if (colIndex === -1) {
-        throw new Error('Stock could not be found');
+        const msg = `Stock with ticker ${ticker} doesn't exist.`;
+        throw new TriportError(msg);
     }
     const lastRow = ex[ex.length - 1];
     const price = parseFloat(lastRow[colIndex]);

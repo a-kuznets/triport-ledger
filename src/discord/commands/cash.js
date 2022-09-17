@@ -14,7 +14,7 @@ export async function execute(interaction) {
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
-    await rules.assertAccountExists(scribe.cash);
+    await rules.assertAccountExists(fin, scribe.cash);
     const cash = await bank.accountBalance(fin, scribe.cash);
     return `${money.format(cash)} in cash account.`;
 }

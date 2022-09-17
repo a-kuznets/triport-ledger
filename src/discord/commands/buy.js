@@ -29,7 +29,7 @@ export async function execute(interaction) {
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
-    await rules.assertAccountExists(constants.cash);
+    await rules.assertAccountExists(fin, constants.cash);
     const price = await market.stockPrice(fin, ticker);
     const cost = quantity * price;
     await rules.assertEnoughMoney(fin, constants.cash, cost);

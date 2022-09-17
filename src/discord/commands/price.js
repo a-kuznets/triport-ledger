@@ -6,11 +6,11 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
     .setName('price')
-    .setDescription('It costs what it costs, and not a copper less.')
+    .setDescription('The market moves fast.')
     .addStringOption(option => {
         return option
             .setName('ticker')
-            .setDescription('Which fine company caught your eye?')
+            .setDescription('Which company would you like to price check?')
             .setRequired(true);
     });
 

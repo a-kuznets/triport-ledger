@@ -5,7 +5,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
     .setName('register')
-    .setDescription('New here, huh?')
+    .setDescription('New in town?')
     .addStringOption(option => {
         return option
             .setName('url')

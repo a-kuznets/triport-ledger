@@ -12,13 +12,13 @@ export const data = new SlashCommandBuilder()
     .addIntegerOption(option => {
         return option
             .setName('quantity')
-            .setDescription('How many shares are we looking at here?')
+            .setDescription('How many shares would you like to buy?')
             .setRequired(true);
     })
     .addStringOption(option => {
         return option
             .setName('ticker')
-            .setDescription('This stock is selling like rock cakes.')
+            .setDescription('In which company?')
             .setRequired(true);
     });
 

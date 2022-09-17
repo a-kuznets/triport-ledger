@@ -1,9 +1,8 @@
 import * as users from '../users.js';
+import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/market.js';
-import messages from '../messages.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
-import TriportError from '../../triport/error.js';
 
 export const data = new SlashCommandBuilder()
     .setName('price')
@@ -18,10 +17,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker').toUpperCase();
-    const userExists = await users.doesUserExist(tag);
-    if (!userExists) {
-        throw new TriportError(messages.userNotConfigured);
-    }
+    await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const ex = await market.exchange(sheetId);
     const price = await market.stockPrice(ex, ticker);

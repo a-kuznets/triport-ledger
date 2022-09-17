@@ -1,11 +1,10 @@
 import * as users from '../users.js';
+import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/market.js';
 import * as bank from '../../triport/bank.js';
-import messages from '../messages.json' assert { type: 'json' };
 import constants from '../../triport/scribe.json' assert { type: 'json' };
 import { SlashCommandBuilder } from '@discordjs/builders';
-import TriportError from '../../triport/error.js';
 
 export const data = new SlashCommandBuilder()
     .setName('buy')
@@ -27,22 +26,13 @@ export async function execute(interaction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker').toUpperCase();
     const quantity = interaction.options.getInteger('quantity');
-    const userExists = await users.doesUserExist(tag);
-    if (!userExists) {
-        throw new TriportError(messages.userNotConfigured);
-    }
+    await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);
-    const cashExists = await bank.accountExists(fin, constants.cash);
-    if (!cashExists) {
-        throw new TriportError(messages.accountDoesNotExist);
-    }
+    await rules.assertAccountExists(constants.cash);
     const price = await market.stockPrice(fin, ticker);
     const cost = quantity * price;
-    const cash = await bank.accountBalance(fin, constants.cash);
-    if (cost > cash) {
-        throw new TriportError(messages.notEnoughCash);
-    }
+    await rules.assertEnoughMoney(fin, constants.cash, cost);
     const stockExists = await bank.stockExists(fin, ticker);
     if (stockExists) {
         await bank.updateStock(fin, sheetId, ticker, quantity);

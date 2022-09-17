@@ -17,10 +17,11 @@ export async function execute(interaction) {
         throw new TriportError(messages.userNotConfigured);
     }
     const sheetId = (await users.findUser(tag)).sheetId;
-    const cashExists = await bank.accountExists(sheetId, constants.cash);
+    const fin = await bank.finances(sheetId);
+    const cashExists = await bank.accountExists(fin, constants.cash);
     if (!cashExists) {
         throw new TriportError(messages.accountDoesNotExist);
     }
-    const cash = await bank.accountBalance(sheetId, constants.cash);
+    const cash = await bank.accountBalance(fin, constants.cash);
     return `${money.format(cash)} in cash account.`;
 }

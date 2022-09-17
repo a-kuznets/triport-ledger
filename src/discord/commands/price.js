@@ -23,7 +23,8 @@ export async function execute(interaction) {
         throw new TriportError(messages.userNotConfigured);
     }
     const sheetId = (await users.findUser(tag)).sheetId;
-    const price = await market.stockPrice(sheetId, ticker);
-    const date = await market.date(sheetId);
+    const ex = await market.exchange(sheetId);
+    const price = await market.stockPrice(ex, ticker);
+    const date = await market.date(ex);
     return `${ticker} is worth ${money.format(price)} on ${date}`;
 }

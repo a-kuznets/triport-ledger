@@ -32,26 +32,28 @@ export async function execute(interaction) {
         throw new TriportError(messages.userNotConfigured);
     }
     const sheetId = (await users.findUser(tag)).sheetId;
-    const cashExists = await bank.accountExists(sheetId, constants.cash);
+    const fin = await bank.finances(sheetId);
+    const cashExists = await bank.accountExists(fin, constants.cash);
     if (!cashExists) {
         throw new TriportError(messages.accountDoesNotExist);
     }
-    const price = await market.stockPrice(sheetId, ticker);
+    const price = await market.stockPrice(fin, ticker);
     const cost = quantity * price;
-    const cash = await bank.accountBalance(sheetId, constants.cash);
+    const cash = await bank.accountBalance(fin, constants.cash);
     if (cost > cash) {
         throw new TriportError(messages.notEnoughCash);
     }
-    const stockExists = await bank.stockExists(sheetId, ticker);
+    const stockExists = await bank.stockExists(fin, ticker);
     if (stockExists) {
-        await bank.updateStock(sheetId, ticker, quantity);
+        await bank.updateStock(fin, sheetId, ticker, quantity);
     } else {
-        await bank.newStock(sheetId, ticker, quantity);
+        await bank.newStock(fin, sheetId, ticker, quantity);
     }
-    const date = await market.date(sheetId, ticker);
+    const ex = await market.exchange(id);
+    const date = await market.date(ex, ticker);
     const event = `Buy ${quantity} ${ticker}`;
     const transaction = [
-        sheetId, date, constants.payee, event, 0 - cost, constants.cash
+        fin, sheetId, date, constants.payee, event, 0 - cost, constants.cash
     ];
     await bank.transact(...transaction);
     return `Bought ${quantity} ${ticker} at ${money.format(price)} on ${date}`;

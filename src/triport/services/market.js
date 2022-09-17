@@ -1,17 +1,11 @@
-import * as ledger
-    from './ledger.js';
-import constants
-    from './scribe.json' assert {
-    type: 'json'
-    };
+import * as ledger from './ledger.js';
+import scribe from './scribe.json' assert { type: 'json' };
 
-export async function date(id) {
-    const ex = await exchange(id);
+export async function date(ex) {
     return ex[ex.length - 1][0];
 }
 
-export async function stockPrice(id, ticker) {
-    const ex = await exchange(id);
+export async function stockPrice(ex, ticker) {
     const headerRow = ex[0];
     const colIndex = headerRow.findIndex(header => {
         return header.toLowerCase().includes(`(${ticker.toLowerCase()})`)
@@ -24,8 +18,7 @@ export async function stockPrice(id, ticker) {
     return price;
 }
 
-export async function tickerColumn(id, ticker) {
-    const ex = await exchange(id);
+export async function tickerColumn(ex, ticker) {
     const i = ex[0].findIndex(header => {
         return header.toLowerCase().includes(`(${ticker.toLowerCase()})`);
     });
@@ -34,8 +27,8 @@ export async function tickerColumn(id, ticker) {
     return alphabet()[i];
 }
 
-async function exchange(id) {
-    return await ledger.get(id, constants.exchange);
+export async function exchange(id) {
+    return await ledger.get(id, scribe.exchange);
 }
 
 function alphabet() {

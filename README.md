@@ -8,3 +8,13 @@ Fill in `config/service-account.json` with your Google Cloud service account key
 # Running the bot
 Add the bot to your Discord server using the OAuth2 invite link.
 Execute `run-discord-bot.sh` to run the bot.
+
+# Roadmap
+- [ ] Add ability for DM to open/close market.
+- [ ] Move to cloud hosting.
+- [ ] Add summary commands to view current sheet state.
+- [ ] Add ability to generate time series graphs.
+- [ ] Add commands for XP sheet.
+- [ ] Add commands for Inventory sheet.
+- [ ] Add commands for Downtime sheet.
+- [ ] Switch to TypeScript.

@@ -3,31 +3,28 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import config from '../../config/discord.json' assert { type: 'json' };
 
-const commands = [];
-const commandFiles = readdirSync('./src/discord/commands').filter(file => {
-	return file.endsWith('.js')
-});
+const commands = await loadCommands();
+await pushCommands(commands);
+process.exit(0);
 
-for (const file of commandFiles) {
-	const command = await import(`./commands/${file}`);
-	commands.push(command.data.toJSON());
+async function pushCommands(commands) {
+	console.log('Started refreshing application (/) commands.');
+	const rest = new REST({ version: '9' }).setToken(config.token);
+	await rest.put(
+		Routes.applicationCommands(config.clientId),
+		{ body: commands },
+	);
+	console.log('Successfully reloaded application (/) commands.');
 }
 
-const rest = new REST({ version: '9' }).setToken(config.token);
-
-await (async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(
-			Routes.applicationCommands(config.clientId),
-			{ body: commands },
-		);
-
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
+async function loadCommands() {
+	const commands = [];
+	const commandFiles = readdirSync('./src/discord/commands').filter(file => {
+		return file.endsWith('.js')
+	});
+	for (const file of commandFiles) {
+		const command = await import(`./commands/${file}`);
+		commands.push(command.data.toJSON());
 	}
-})();
-
-process.exit(0);
+	return commands;
+}

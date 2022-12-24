@@ -1,3 +1,5 @@
+![The Triport City rivers inlaid into a golden gear.](./assets/triport-services-small.png)
+
 Trade on the stock exchange of Triport City, the financial capital of the Free Cities, from the comfort of your Discord client.
 
 # Getting started

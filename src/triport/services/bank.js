@@ -5,14 +5,14 @@ import scribe from '../scribe.json' assert { type: 'json' };
 export async function accountExists(fin, acct) {
     const i = fin[0].indexOf(scribe.accounts);
     return fin.some(x => {
-        return x[i].toLowerCase() === acct.toLowerCase()
+        return x[i].toLowerCase() === acct.toLowerCase();
     });
 }
 
 export async function accountBalance(fin, acct) {
     const i = fin[0].indexOf(scribe.accounts);
     const j = fin.find(x => {
-        return x[i].toLowerCase() === acct.toLowerCase()
+        return x[i].toLowerCase() === acct.toLowerCase();
     });
     return parseFloat(j[i + 1].trim().replace(/[^0-9.-]+/g, ''));
 }

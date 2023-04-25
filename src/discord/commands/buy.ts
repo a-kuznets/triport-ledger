@@ -3,7 +3,7 @@ import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/services/market.js';
 import * as bank from '../../triport/services/bank.js';
-import scribe from '../../triport/scribe.json' assert { type: 'json' };
+import scribe from '../../triport/scribe.json';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 export const data = new SlashCommandBuilder()
@@ -41,7 +41,7 @@ export async function execute(interaction) {
     } else {
         await bank.newStock(fin, ex, sheetId, ticker, quantity);
     }
-    const date = await market.date(ex, ticker);
+    const date = await market.date(ex);
     const event = `Buy ${quantity} ${ticker}`;
     const transaction = [
         fin, sheetId, date, scribe.payee, event, 0 - cost, scribe.cash

@@ -2,6 +2,7 @@ import * as users from '../users.js';
 import * as rules from '../rules.js';
 import * as bank from '../../triport/services/bank.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('shares')
@@ -13,9 +14,9 @@ export const data = new SlashCommandBuilder()
             .setRequired(true);
     });
 
-export async function execute(interaction) {
+export async function execute(interaction: CommandInteraction) {
     const tag = interaction.user.tag;
-    const ticker = interaction.options.getString('ticker').toUpperCase();
+    const ticker = interaction.options.getString('ticker')!.toUpperCase();
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
     const fin = await bank.finances(sheetId);

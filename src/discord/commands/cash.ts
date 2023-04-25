@@ -4,12 +4,13 @@ import * as money from '../../utilities/money.js';
 import * as bank from '../../triport/services/bank.js';
 import scribe from '../../triport/scribe.json';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('cash')
     .setDescription('View the balance of your cash account.');
 
-export async function execute(interaction) {
+export async function execute(interaction: CommandInteraction) {
     const tag = interaction.user.tag;
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;

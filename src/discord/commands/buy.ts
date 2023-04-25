@@ -5,6 +5,7 @@ import * as market from '../../triport/services/market.js';
 import * as bank from '../../triport/services/bank.js';
 import scribe from '../../triport/scribe.json';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('buy')
@@ -22,10 +23,10 @@ export const data = new SlashCommandBuilder()
             .setRequired(true);
     });
 
-export async function execute(interaction) {
+export async function execute(interaction: CommandInteraction) {
     const tag = interaction.user.tag;
-    const ticker = interaction.options.getString('ticker').toUpperCase();
-    const quantity = interaction.options.getInteger('quantity');
+    const ticker = interaction.options.getString('ticker')!.toUpperCase();
+    const quantity = interaction.options.getInteger('quantity')!;
     rules.assertPositiveInteger(quantity);
     await rules.assertUserExists(tag);
     const sheetId = (await users.findUser(tag)).sheetId;
@@ -43,9 +44,6 @@ export async function execute(interaction) {
     }
     const date = await market.date(ex);
     const event = `Buy ${quantity} ${ticker}`;
-    const transaction = [
-        fin, sheetId, date, scribe.payee, event, 0 - cost, scribe.cash
-    ];
-    await bank.transact(...transaction);
+    await bank.transact(fin, sheetId, date, scribe.payee, event, 0 - cost, scribe.cash);
     return `Bought ${quantity} ${ticker} at ${money.format(price)} on ${date}.`;
 }

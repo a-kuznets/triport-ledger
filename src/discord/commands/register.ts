@@ -1,7 +1,8 @@
 import * as users from '../users.js';
 import * as rules from '../rules.js';
-import messages from '../messages.json' assert { type: 'json' };
+import messages from '../messages.json';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('register')
@@ -13,9 +14,9 @@ export const data = new SlashCommandBuilder()
             .setRequired(true);
     });
 
-export async function execute(interaction) {
+export async function execute(interaction: CommandInteraction) {
     const tag = interaction.user.tag;
-    const sheetUrl = interaction.options.getString('url');
+    const sheetUrl = interaction.options.getString('url')!;
     const start = sheetUrl.indexOf('/d/') + '/d/'.length;
     const end = sheetUrl.indexOf('/', start);
     const id = sheetUrl.slice(start, end);

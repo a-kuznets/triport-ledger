@@ -1,6 +1,5 @@
 export default class TriportError extends Error {
-    constructor(message) {
+    constructor(message: string) {
         super(message);
-        this.name = 'TriportError';
     }
 }

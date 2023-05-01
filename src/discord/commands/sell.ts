@@ -3,9 +3,9 @@ import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/services/market.js';
 import * as bank from '../../triport/services/bank.js';
-import scribe from '../../triport/scribe.json';
+import scribe from '../../triport/scribe.json' assert {type: 'json'};
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('sell')
@@ -23,7 +23,7 @@ export const data = new SlashCommandBuilder()
             .setRequired(true);
     });
 
-export async function execute(interaction: CommandInteraction) {
+export async function execute(interaction: ChatInputCommandInteraction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker')!.toUpperCase();
     const quantity = interaction.options.getInteger('quantity')!;

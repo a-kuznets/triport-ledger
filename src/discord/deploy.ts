@@ -7,9 +7,10 @@ const commands = await loadCommands();
 await pushCommands(commands);
 process.exit(0);
 
-async function pushCommands(commands) {
+async function pushCommands(commands: object[]) {
 	console.log('Started refreshing application (/) commands.');
 	const rest = new REST({ version: '9' }).setToken(config.token);
+	console.log(commands);
 	await rest.put(
 		Routes.applicationCommands(config.clientId),
 		{ body: commands },
@@ -17,9 +18,9 @@ async function pushCommands(commands) {
 	console.log('Successfully reloaded application (/) commands.');
 }
 
-async function loadCommands() {
+async function loadCommands(): Promise<object[]> {
 	const commands = [];
-	const commandFiles = readdirSync('./src/discord/commands').filter(file => {
+	const commandFiles = readdirSync('./dist/src/discord/commands').filter(file => {
 		return file.endsWith('.js')
 	});
 	for (const file of commandFiles) {

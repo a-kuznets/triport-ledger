@@ -1,13 +1,13 @@
 import { readdirSync } from 'fs';
 import path from 'path';
-import { Client, Collection, Intents } from 'discord.js';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import config from '../../config/discord.json' assert { type: 'json' };
 import { Command } from './command.js';
 import TriportError from '../triport/error.js';
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const commandsPath = path.resolve('src/discord/commands');
+const commandsPath = path.resolve('dist/src/discord/commands');
 const commands = new Collection<string, Command>();
 const commandFiles = readdirSync(commandsPath).filter(file => {
 	return file.endsWith('.js')

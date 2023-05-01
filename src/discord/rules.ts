@@ -3,7 +3,7 @@ import * as bank from '../triport/services/bank.js';
 import TriportError from '../triport/error.js';
 import messages from './messages.json' assert { type: 'json' };
 
-export async function assertUserExists(tag) {
+export async function assertUserExists(tag: string) {
     const userExists = await users.doesUserExist(tag);
     if (!userExists) {
         throw new TriportError(messages.userNotConfigured);

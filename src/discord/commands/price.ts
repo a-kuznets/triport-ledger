@@ -3,8 +3,7 @@ import * as rules from '../rules.js';
 import * as money from '../../utilities/money.js';
 import * as market from '../../triport/services/market.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { MessageInteraction } from 'discord.js';
-import { CommandInteraction } from 'discord.js';
+import { ChatInputCommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
     .setName('price')
@@ -16,7 +15,7 @@ export const data = new SlashCommandBuilder()
             .setRequired(true);
     });
 
-export async function execute(interaction: CommandInteraction) {
+export async function execute(interaction: ChatInputCommandInteraction) {
     const tag = interaction.user.tag;
     const ticker = interaction.options.getString('ticker')?.toUpperCase();
     await rules.assertUserExists(tag);

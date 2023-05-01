@@ -1,5 +1,5 @@
 {
-    "userNotConfigured": "User not configured. Please register to trade on the Triport City Exchange.",
+    "userNotConfigured": "User not configured. Please `/register` to trade on the Triport City Exchange.",
     "accountDoesNotExist": "Couldn't find account.",
     "tryAgainTypo": "Invalid command. Please try again.",
     "alreadyRegistered": "User already exists.",
